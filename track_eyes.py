@@ -1,13 +1,15 @@
 import argparse
-import cv2
-import imutils
-from eyetracker import EyeTracker
 
-argparser = argparse.ArgumentParser()
-argparser.add_argument('-f', '--face', required=True, help='Path to where the face cascade resides.')
-argparser.add_argument('-e', '--eye', required=True, help='Path to where the eye cascade resides.')
-argparser.add_argument('-v', '--video', help='Path to where the (optional) video file resides.')
-arguments = vars(argparser.parse_args())
+import cv2
+
+import imutils
+from tracker.eye_tracker import EyeTracker
+
+argument_parser = argparse.ArgumentParser()
+argument_parser.add_argument('-f', '--face', required=True, help='Path to where the face cascade resides.')
+argument_parser.add_argument('-e', '--eye', required=True, help='Path to where the eye cascade resides.')
+argument_parser.add_argument('-v', '--video', help='Path to where the (optional) video file resides.')
+arguments = vars(argument_parser.parse_args())
 
 eye_tracker = EyeTracker(arguments['face'], arguments['eye'])
 
@@ -37,7 +39,6 @@ while True:
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
-
 
 camera.release()
 cv2.destroyAllWindows()
